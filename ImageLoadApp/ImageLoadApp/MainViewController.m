@@ -30,7 +30,7 @@ NSString * const imageCell = @"imageCell";
 
 - (void)setup {
     self.table = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-    [self.table registerClass:UITableViewCell.class forCellReuseIdentifier:imageCell];
+    [self.table registerClass:[ImageTableViewCell class] forCellReuseIdentifier:imageCell];
     self.table.delegate = self;
     self.table.dataSource = self;
     [self.view addSubview: self.table];
@@ -47,12 +47,13 @@ NSString * const imageCell = @"imageCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ImageTableViewCell *cell = [self.table dequeueReusableCellWithIdentifier:imageCell];
-    if (cell == nil) {
-        cell = [[ImageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:imageCell];
-    }
-    cell.descriptionLabel = self.urlList[indexPath.row];
+    ImageTableViewCell *cell = [self.table dequeueReusableCellWithIdentifier:imageCell forIndexPath:indexPath];
+    cell.descriptionLabel.text = self.urlList[indexPath.row];
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 200;
 }
 
 @end

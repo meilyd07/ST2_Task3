@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "MainViewModel.h"
+#import "MainViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,7 +19,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    UIViewController *mainViewController = [UIViewController new];
+    MainViewController *mainViewController = [MainViewController new];
+    MainViewModel *viewModel = [MainViewModel new];
+    mainViewController.viewModel = viewModel;
     [mainViewController.view setBackgroundColor:[UIColor whiteColor]];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
     [self.window setRootViewController:navigationController];

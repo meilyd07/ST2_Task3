@@ -10,5 +10,5 @@
 
 @interface ImageTableViewCell : UITableViewCell
 @property (nonatomic, strong) UILabel *descriptionLabel;
-//@property (nonatomic, strong) UIImageView *image;
+@property (nonatomic, strong) UIImageView *image;
 @end

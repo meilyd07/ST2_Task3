@@ -45,6 +45,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A212D9E22B598CA008592A8 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				6AB79E3422B45AA80007AE40 /* ImageTableViewCell.h */,
+				6AB79E3522B45AA80007AE40 /* ImageTableViewCell.m */,
+			);
+			path = cells;
+			sourceTree = "<group>";
+		};
 		6AB79E0E22B44D5B0007AE40 = {
 			isa = PBXGroup;
 			children = (
@@ -64,10 +73,9 @@
 		6AB79E1922B44D5B0007AE40 /* ImageLoadApp */ = {
 			isa = PBXGroup;
 			children = (
+				6A212D9E22B598CA008592A8 /* cells */,
 				6AB79E1A22B44D5B0007AE40 /* AppDelegate.h */,
 				6AB79E1B22B44D5B0007AE40 /* AppDelegate.m */,
-				6AB79E3422B45AA80007AE40 /* ImageTableViewCell.h */,
-				6AB79E3522B45AA80007AE40 /* ImageTableViewCell.m */,
 				6A63447B22B55C0800ED2703 /* MainViewModel.h */,
 				6A63447C22B55C0800ED2703 /* MainViewModel.m */,
 				6AB79E1D22B44D5B0007AE40 /* MainViewController.h */,
