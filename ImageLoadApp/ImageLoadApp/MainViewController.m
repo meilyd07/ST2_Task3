@@ -25,7 +25,7 @@ NSString * const imageCell = @"imageCell";
 }
 
 - (void)populateData {
-    self.urlList = @[@"efwed", @"dfs", @"edwdw", @"df"];
+    self.urlList = [self.viewModel loadData];
 }
 
 - (void)setup {

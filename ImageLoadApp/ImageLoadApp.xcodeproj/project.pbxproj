@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A63447D22B55C0800ED2703 /* MainViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63447C22B55C0800ED2703 /* MainViewModel.m */; };
 		6AB79E1C22B44D5B0007AE40 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB79E1B22B44D5B0007AE40 /* AppDelegate.m */; };
 		6AB79E1F22B44D5B0007AE40 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB79E1E22B44D5B0007AE40 /* MainViewController.m */; };
 		6AB79E2222B44D5B0007AE40 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AB79E2022B44D5B0007AE40 /* Main.storyboard */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6A63447B22B55C0800ED2703 /* MainViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewModel.h; sourceTree = "<group>"; };
+		6A63447C22B55C0800ED2703 /* MainViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewModel.m; sourceTree = "<group>"; };
 		6AB79E1722B44D5B0007AE40 /* ImageLoadApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageLoadApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AB79E1A22B44D5B0007AE40 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6AB79E1B22B44D5B0007AE40 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -65,6 +68,8 @@
 				6AB79E1B22B44D5B0007AE40 /* AppDelegate.m */,
 				6AB79E3422B45AA80007AE40 /* ImageTableViewCell.h */,
 				6AB79E3522B45AA80007AE40 /* ImageTableViewCell.m */,
+				6A63447B22B55C0800ED2703 /* MainViewModel.h */,
+				6A63447C22B55C0800ED2703 /* MainViewModel.m */,
 				6AB79E1D22B44D5B0007AE40 /* MainViewController.h */,
 				6AB79E1E22B44D5B0007AE40 /* MainViewController.m */,
 				6AB79E2022B44D5B0007AE40 /* Main.storyboard */,
@@ -149,6 +154,7 @@
 				6AB79E1F22B44D5B0007AE40 /* MainViewController.m in Sources */,
 				6AB79E3622B45AA80007AE40 /* ImageTableViewCell.m in Sources */,
 				6AB79E2A22B44D5C0007AE40 /* main.m in Sources */,
+				6A63447D22B55C0800ED2703 /* MainViewModel.m in Sources */,
 				6AB79E1C22B44D5B0007AE40 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MainViewModel.h"
 
 @interface MainViewController : UIViewController
-
-
+@property (strong, nonatomic) MainViewModel *viewModel;
 @end
 
