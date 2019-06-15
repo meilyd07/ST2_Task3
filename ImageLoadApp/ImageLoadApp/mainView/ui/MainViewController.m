@@ -29,6 +29,7 @@ NSString * const imageCell = @"imageCell";
 }
 
 - (void)setup {
+    self.navigationItem.title = @"Main";
     self.table = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     [self.table registerClass:[ImageTableViewCell class] forCellReuseIdentifier:imageCell];
     self.table.delegate = self;

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A212DA422B5AF0D008592A8 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A212DA322B5AF0D008592A8 /* DetailViewController.m */; };
+		6A212DA822B5AF48008592A8 /* DetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A212DA722B5AF48008592A8 /* DetailViewModel.m */; };
 		6A63447D22B55C0800ED2703 /* MainViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A63447C22B55C0800ED2703 /* MainViewModel.m */; };
 		6AB79E1C22B44D5B0007AE40 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB79E1B22B44D5B0007AE40 /* AppDelegate.m */; };
 		6AB79E1F22B44D5B0007AE40 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB79E1E22B44D5B0007AE40 /* MainViewController.m */; };
@@ -18,6 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6A212DA222B5AF0D008592A8 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		6A212DA322B5AF0D008592A8 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		6A212DA622B5AF48008592A8 /* DetailViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewModel.h; sourceTree = "<group>"; };
+		6A212DA722B5AF48008592A8 /* DetailViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewModel.m; sourceTree = "<group>"; };
 		6A63447B22B55C0800ED2703 /* MainViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewModel.h; sourceTree = "<group>"; };
 		6A63447C22B55C0800ED2703 /* MainViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewModel.m; sourceTree = "<group>"; };
 		6AB79E1722B44D5B0007AE40 /* ImageLoadApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageLoadApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +60,45 @@
 			path = cells;
 			sourceTree = "<group>";
 		};
+		6A212D9F22B5AE29008592A8 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				6AB79E1D22B44D5B0007AE40 /* MainViewController.h */,
+				6AB79E1E22B44D5B0007AE40 /* MainViewController.m */,
+				6A212D9E22B598CA008592A8 /* cells */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
+		6A212DA022B5AE77008592A8 /* mainView */ = {
+			isa = PBXGroup;
+			children = (
+				6A63447B22B55C0800ED2703 /* MainViewModel.h */,
+				6A63447C22B55C0800ED2703 /* MainViewModel.m */,
+				6A212D9F22B5AE29008592A8 /* ui */,
+			);
+			path = mainView;
+			sourceTree = "<group>";
+		};
+		6A212DA122B5AEED008592A8 /* detailView */ = {
+			isa = PBXGroup;
+			children = (
+				6A212DA522B5AF17008592A8 /* ui */,
+				6A212DA622B5AF48008592A8 /* DetailViewModel.h */,
+				6A212DA722B5AF48008592A8 /* DetailViewModel.m */,
+			);
+			path = detailView;
+			sourceTree = "<group>";
+		};
+		6A212DA522B5AF17008592A8 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				6A212DA222B5AF0D008592A8 /* DetailViewController.h */,
+				6A212DA322B5AF0D008592A8 /* DetailViewController.m */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
 		6AB79E0E22B44D5B0007AE40 = {
 			isa = PBXGroup;
 			children = (
@@ -73,13 +118,10 @@
 		6AB79E1922B44D5B0007AE40 /* ImageLoadApp */ = {
 			isa = PBXGroup;
 			children = (
-				6A212D9E22B598CA008592A8 /* cells */,
+				6A212DA122B5AEED008592A8 /* detailView */,
+				6A212DA022B5AE77008592A8 /* mainView */,
 				6AB79E1A22B44D5B0007AE40 /* AppDelegate.h */,
 				6AB79E1B22B44D5B0007AE40 /* AppDelegate.m */,
-				6A63447B22B55C0800ED2703 /* MainViewModel.h */,
-				6A63447C22B55C0800ED2703 /* MainViewModel.m */,
-				6AB79E1D22B44D5B0007AE40 /* MainViewController.h */,
-				6AB79E1E22B44D5B0007AE40 /* MainViewController.m */,
 				6AB79E2022B44D5B0007AE40 /* Main.storyboard */,
 				6AB79E2322B44D5C0007AE40 /* Assets.xcassets */,
 				6AB79E2522B44D5C0007AE40 /* LaunchScreen.storyboard */,
@@ -162,8 +204,10 @@
 				6AB79E1F22B44D5B0007AE40 /* MainViewController.m in Sources */,
 				6AB79E3622B45AA80007AE40 /* ImageTableViewCell.m in Sources */,
 				6AB79E2A22B44D5C0007AE40 /* main.m in Sources */,
+				6A212DA822B5AF48008592A8 /* DetailViewModel.m in Sources */,
 				6A63447D22B55C0800ED2703 /* MainViewModel.m in Sources */,
 				6AB79E1C22B44D5B0007AE40 /* AppDelegate.m in Sources */,
+				6A212DA422B5AF0D008592A8 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
