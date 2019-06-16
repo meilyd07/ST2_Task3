@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CustomTableViewCellDelegate <NSObject>
+
+- (void)didTapImageAtIndex:(NSInteger)index;
+
+@end
+
 @interface ImageTableViewCell : UITableViewCell
 @property (nonatomic, strong) UILabel *descriptionLabel;
-@property (nonatomic, strong) UIImageView *image;
+@property (nonatomic, assign) NSInteger cellIndex;
+@property (nonatomic, weak) id<CustomTableViewCellDelegate>delegate;
 @end

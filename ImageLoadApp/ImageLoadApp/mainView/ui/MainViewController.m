@@ -9,7 +9,7 @@
 #import "MainViewController.h"
 #import "ImageTableViewCell.h"
 
-@interface MainViewController () <UITableViewDelegate,UITableViewDataSource>
+@interface MainViewController () <UITableViewDelegate,UITableViewDataSource, CustomTableViewCellDelegate>
 @property (strong, nonatomic) UITableView *table;
 @property (strong, nonatomic) NSArray *urlList;
 @end
@@ -49,12 +49,21 @@ NSString * const imageCell = @"imageCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ImageTableViewCell *cell = [self.table dequeueReusableCellWithIdentifier:imageCell forIndexPath:indexPath];
+    NSLog(@"%ld", (long)indexPath.row);
+    cell.cellIndex = indexPath.row;
     cell.descriptionLabel.text = self.urlList[indexPath.row];
+    cell.delegate = self;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 200;
+}
+
+-(void)didTapImageAtIndex:(NSInteger)index
+{
+    NSLog(@"Index %ld ", (long)index);
+    //Do whatever you want here
 }
 
 @end
