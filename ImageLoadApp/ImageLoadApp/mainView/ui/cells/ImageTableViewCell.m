@@ -47,6 +47,10 @@
 
 - (void)addConstraintToCell {
     self.tableImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.tableImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.tableImageView.clipsToBounds = YES;
+    self.tableImageView.layer.borderColor = [UIColor blackColor].CGColor;
+    self.tableImageView.layer.borderWidth = 1;
     NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:self.tableImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute  multiplier:1 constant:150];
     NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.tableImageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute  multiplier:1 constant:150];
     NSLayoutConstraint *centerImageY = [NSLayoutConstraint constraintWithItem:self.tableImageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
