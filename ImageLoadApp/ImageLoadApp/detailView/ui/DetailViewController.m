@@ -42,6 +42,7 @@
 - (void)setup {
     [self.view setBackgroundColor:[UIColor whiteColor]];
     self.title = @"Details";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(tapBack:)];
     self.imageView = [[UIImageView alloc] initWithImage:[self.viewModel getImage]];
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.view addSubview:self.imageView];
@@ -66,6 +67,10 @@
     
     NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:1.0f constant:0];
     [self.view addConstraints:@[top, height, leading, width]];
+}
+
+- (void)tapBack:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void) dealloc {
