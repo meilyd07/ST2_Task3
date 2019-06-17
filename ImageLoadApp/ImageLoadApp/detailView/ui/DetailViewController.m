@@ -14,6 +14,31 @@
 
 @implementation DetailViewController
 
+- (id) init
+{
+    self = [super init];
+    if (!self) return nil;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(imageLoadedNotification:)
+                                                 name:@"ImageLoaded"
+                                               object:nil];
+    return self;
+}
+
+- (void) imageLoadedNotification:(NSNotification *) notification
+{
+    if ([[notification name] isEqualToString:@"ImageLoaded"]) {
+        if (notification.userInfo[@"cellIndex"]) {
+            NSLog(@"got it too");
+            NSString *cellIndexString = notification.userInfo[@"cellIndex"];
+            NSInteger celIndexInteger = [cellIndexString integerValue];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                NSLog(@"got it too");
+//            });
+        }
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setup];

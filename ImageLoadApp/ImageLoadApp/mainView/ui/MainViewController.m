@@ -13,7 +13,7 @@
 
 @interface MainViewController () <UITableViewDelegate,UITableViewDataSource, CustomTableViewCellDelegate>
 @property (strong, nonatomic) UITableView *table;
-@property (strong, nonatomic) NSArray *urlList;
+// (strong, nonatomic) NSArray *urlList;
 @end
 
 @implementation MainViewController
@@ -57,7 +57,7 @@ NSString * const imageCell = @"imageCell";
 }
 
 - (void)populateData {
-    self.urlList = [self.viewModel loadData];
+    [self.viewModel loadData];
     [self.viewModel loadImages];
 }
 
@@ -68,12 +68,23 @@ NSString * const imageCell = @"imageCell";
     self.table.delegate = self;
     self.table.dataSource = self;
     [self.view addSubview: self.table];
+    [self addConstraintToTable];
+    
+}
+
+- (void)addConstraintToTable {
+    self.table.translatesAutoresizingMaskIntoConstraints = NO;
+    NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:self.table attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0];
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.table attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:0];
+    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.table attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+    NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:self.table attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:0];
+    [self.view addConstraints:@[leading, trailing, top, bottom]];
 }
 
 #pragma mark - Table Source and Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.urlList.count;
+    return [self.viewModel getDataCount];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -82,18 +93,10 @@ NSString * const imageCell = @"imageCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ImageTableViewCell *cell = [self.table dequeueReusableCellWithIdentifier:imageCell forIndexPath:indexPath];
-    NSLog(@"%ld", (long)indexPath.row);
     cell.cellIndex = indexPath.row;
-
-    NSString *imageUrlString = self.urlList[indexPath.row];
-    cell.descriptionLabel.text = imageUrlString;
+    cell.descriptionLabel.text = [self.viewModel getDescription:indexPath.row];
     cell.delegate = self;
-
-    UIImage *imageFromCache = [self.viewModel.imageCache objectForKey:imageUrlString];
-
-    if (imageFromCache) {
-        cell.tableImageView.image = imageFromCache;
-    }
+    cell.tableImageView.image = [self.viewModel getImage:indexPath.row];
     return cell;
 }
 
@@ -103,8 +106,6 @@ NSString * const imageCell = @"imageCell";
 
 -(void)didTapImageAtIndex:(NSInteger)index
 {
-    //DetailViewController *vc = [[DetailViewController alloc]initWithNibName:@"DetailViewController" bundle:nil];
-    //vc.person = [self.viewModel getContactBySection:cellIndexSection row:cellIndexRow];
     DetailViewController *detailVC = [DetailViewController new];
     DetailViewModel *detailVM = [DetailViewModel new];
     detailVC.viewModel = detailVM;

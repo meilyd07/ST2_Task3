@@ -10,11 +10,12 @@
 
 @interface MainViewModel()
 @property (strong, nonatomic) NSArray *data;
+@property (nonatomic, strong) NSCache *imageCache;
 @end
 
 @implementation MainViewModel
 
--(NSArray *)loadData {
+-(void)loadData {
     self.imageCache = [[NSCache alloc] init];
     self.data = @[@"https://img2.akspic.com/image/32372-privlekatelnost-meh-morda-usy-kotenok-2048x1536.jpg",
       @"https://apod.nasa.gov/apod/image/1906/N00172886_92_beltramini.jpg",
@@ -23,7 +24,6 @@
       @"https://www.jpl.nasa.gov/spaceimages/images/largesize/PIA22948_hires.jpg",
       @"https://www.rautomead.com/uploads/images/gallery/1522251890RT650bronzeholows.jpg",
       @"https://upload.wikimedia.org/wikipedia/commons/3/3d/LARGE_elevation.jpg",
-      @"https://fr.wikipedia.org/wiki/Géomorphologie#/media/Fichier:Earth_surface_NGDC_2000.jpg",
       @"https://upload.wikimedia.org/wikipedia/commons/1/13/Large_clematis_%28red%29.JPG",
       @"https://upload.wikimedia.org/wikipedia/commons/c/c4/Ferrofluid_large_spikes.jpg",
       @"https://upload.wikimedia.org/wikipedia/commons/4/4e/Mammillaria_prolifera20100407_076.jpg",
@@ -59,7 +59,6 @@
       @"https://img2.akspic.com/image/95406-alyaskinskij_malamut-husky-alyaskinskij_haski-labrador-ezdovaya_sobaka-2048x1536.jpg",
       @"https://img3.akspic.com/image/32308-usy-morda-sobaka-pes-shhenok-2048x1536.jpg"
       ];
-    return self.data;
 }
 
 - (void)loadImages {
@@ -80,6 +79,23 @@
                  userInfo:dictionary];
             }
         }];
+    }
+}
+
+- (NSInteger)getDataCount {
+    return self.data.count;
+}
+
+- (NSString *)getDescription:(NSInteger)index {
+    return self.data[index];
+}
+
+- (UIImage *)getImage:(NSInteger)index {
+    UIImage *imageFromCache = [self.imageCache objectForKey:self.data[index]];
+    if (imageFromCache) {
+        return imageFromCache;
+    } else {
+        return [UIImage imageNamed:@"noImage"];
     }
 }
 @end
