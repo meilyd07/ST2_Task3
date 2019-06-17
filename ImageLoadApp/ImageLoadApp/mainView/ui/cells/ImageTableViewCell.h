@@ -18,4 +18,5 @@
 @property (nonatomic, strong) UILabel *descriptionLabel;
 @property (nonatomic, assign) NSInteger cellIndex;
 @property (nonatomic, weak) id<CustomTableViewCellDelegate>delegate;
+@property (nonatomic, strong) UIImageView* tableImageView;
 @end

@@ -9,24 +9,32 @@
 #import "DetailViewController.h"
 
 @interface DetailViewController ()
-
+@property (strong, nonatomic) UIImageView *imageView;
 @end
 
 @implementation DetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self setup];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)setup {
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    self.title = @"Details";
+    self.imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"noImage"]];
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.view addSubview:self.imageView];
+    [self addDetailViewConstraints];
 }
-*/
+
+- (void)addDetailViewConstraints {
+    self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0f constant:0];
+    NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationLessThanOrEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:-10];
+    NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0f constant:10];
+    [self.view addConstraints:@[top, trailing, leading/*, width*/]];
+    
+}
 
 @end

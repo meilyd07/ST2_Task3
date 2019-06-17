@@ -8,10 +8,6 @@
 
 #import "ImageTableViewCell.h"
 
-@interface ImageTableViewCell()
-@property (nonatomic, strong) UIImageView* tableImageView;
-@end
-
 @implementation ImageTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -56,19 +52,13 @@
     NSLayoutConstraint *centerImageY = [NSLayoutConstraint constraintWithItem:self.tableImageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
     
     NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:self.tableImageView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeading multiplier:1.0f constant:10];
-    [self.contentView addConstraint:leading];
-    [self.contentView addConstraint:width];
-    [self.contentView addConstraint:height];
-    [self.contentView addConstraint:centerImageY];
     
     self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
     NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.descriptionLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1 constant:10];
     NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:self.descriptionLabel attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:-40];
     NSLayoutConstraint *distance = [NSLayoutConstraint constraintWithItem:self.tableImageView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.descriptionLabel attribute:NSLayoutAttributeLeading multiplier:1 constant:-10];
-
-    [self.contentView addConstraint:top];
-    [self.contentView addConstraint:trailing];
-    [self.contentView addConstraint:distance];
+    
+    [self.contentView addConstraints:@[leading, width, height, centerImageY, top, trailing, distance]];
 }
 
 @end
