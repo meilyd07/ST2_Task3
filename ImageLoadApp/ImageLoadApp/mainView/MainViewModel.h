@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "DetailViewModel.h"
 
 @interface MainViewModel : NSObject
 - (void)loadData;
@@ -15,4 +16,5 @@
 - (NSInteger)getDataCount;
 - (NSString *)getDescription:(NSInteger)index;
 - (UIImage *)getImage:(NSInteger)index;
+- (DetailViewModel *)getDetailViewModel:(NSInteger)index;
 @end

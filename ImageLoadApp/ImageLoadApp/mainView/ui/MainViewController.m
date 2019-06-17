@@ -13,7 +13,6 @@
 
 @interface MainViewController () <UITableViewDelegate,UITableViewDataSource, CustomTableViewCellDelegate>
 @property (strong, nonatomic) UITableView *table;
-// (strong, nonatomic) NSArray *urlList;
 @end
 
 @implementation MainViewController
@@ -35,7 +34,6 @@ NSString * const imageCell = @"imageCell";
 {
     if ([[notification name] isEqualToString:@"ImageLoaded"]) {
         if (notification.userInfo[@"cellIndex"]) {
-            NSLog(@"got it");
             NSString *cellIndexString = notification.userInfo[@"cellIndex"];
             NSInteger celIndexInteger = [cellIndexString integerValue];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -107,9 +105,11 @@ NSString * const imageCell = @"imageCell";
 -(void)didTapImageAtIndex:(NSInteger)index
 {
     DetailViewController *detailVC = [DetailViewController new];
-    DetailViewModel *detailVM = [DetailViewModel new];
-    detailVC.viewModel = detailVM;
+    detailVC.viewModel = [self.viewModel getDetailViewModel:index];
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
+-(void) dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 @end
