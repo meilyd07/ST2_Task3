@@ -13,6 +13,7 @@
 
 @interface MainViewController () <UITableViewDelegate,UITableViewDataSource, CustomTableViewCellDelegate>
 @property (strong, nonatomic) UITableView *table;
+@property (assign, nonatomic) NSInteger lastPush;
 @end
 
 @implementation MainViewController
@@ -57,6 +58,7 @@ NSString * const imageCell = @"imageCell";
 - (void)populateData {
     [self.viewModel loadData];
     [self.viewModel loadImages];
+    self.lastPush = -1;
 }
 
 - (void)setup {
@@ -104,9 +106,20 @@ NSString * const imageCell = @"imageCell";
 
 -(void)didTapImageAtIndex:(NSInteger)index
 {
+    self.lastPush = index;
     DetailViewController *detailVC = [DetailViewController new];
     detailVC.viewModel = [self.viewModel getDetailViewModel:index];
     [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.lastPush > 0) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.lastPush inSection:0];
+        [self.table scrollToRowAtIndexPath:indexPath
+                             atScrollPosition:UITableViewScrollPositionTop
+                                     animated:YES];
+    }
 }
 
 -(void) dealloc {
