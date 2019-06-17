@@ -10,5 +10,7 @@
 #import <Foundation/Foundation.h>
 
 @interface MainViewModel : NSObject
+@property (nonatomic, strong) NSCache *imageCache;
 -(NSArray *)loadData;
+- (void)loadImages;
 @end

@@ -14,21 +14,43 @@
 @interface MainViewController () <UITableViewDelegate,UITableViewDataSource, CustomTableViewCellDelegate>
 @property (strong, nonatomic) UITableView *table;
 @property (strong, nonatomic) NSArray *urlList;
-
-@property (nonatomic, strong) NSOperationQueue *imageOperationQueue;
-@property (nonatomic, strong) NSCache *imageCache;
 @end
 
 @implementation MainViewController
 
 NSString * const imageCell = @"imageCell";
 
+- (id) init
+{
+    self = [super init];
+    if (!self) return nil;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(imageLoadedNotification:)
+                                                 name:@"ImageLoaded"
+                                               object:nil];
+    return self;
+}
+
+- (void) imageLoadedNotification:(NSNotification *) notification
+{
+    if ([[notification name] isEqualToString:@"ImageLoaded"]) {
+        if (notification.userInfo[@"cellIndex"]) {
+            NSLog(@"got it");
+            NSString *cellIndexString = notification.userInfo[@"cellIndex"];
+            NSInteger celIndexInteger = [cellIndexString integerValue];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSIndexPath *path = [NSIndexPath indexPathForRow:celIndexInteger inSection:0];
+                ImageTableViewCell *updateCell = (ImageTableViewCell *)[self.table cellForRowAtIndexPath: path];
+                if (updateCell) {
+                    [self.table reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
+                }
+            });
+        }
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.imageOperationQueue = [[NSOperationQueue alloc]init];
-    //self.imageOperationQueue.maxConcurrentOperationCount = 4;
-    self.imageCache = [[NSCache alloc] init];
     
     [self populateData];
     [self setup];
@@ -36,6 +58,7 @@ NSString * const imageCell = @"imageCell";
 
 - (void)populateData {
     self.urlList = [self.viewModel loadData];
+    [self.viewModel loadImages];
 }
 
 - (void)setup {
@@ -61,39 +84,16 @@ NSString * const imageCell = @"imageCell";
     ImageTableViewCell *cell = [self.table dequeueReusableCellWithIdentifier:imageCell forIndexPath:indexPath];
     NSLog(@"%ld", (long)indexPath.row);
     cell.cellIndex = indexPath.row;
-    
+
     NSString *imageUrlString = self.urlList[indexPath.row];
     cell.descriptionLabel.text = imageUrlString;
     cell.delegate = self;
-    
-    UIImage *imageFromCache = [self.imageCache objectForKey:imageUrlString];
-    
+
+    UIImage *imageFromCache = [self.viewModel.imageCache objectForKey:imageUrlString];
+
     if (imageFromCache) {
         cell.tableImageView.image = imageFromCache;
-        //[cell.tableImageView setFrame: ]; // set frame
     }
-    else
-    {
-        //cell.tableImageView.image = [UIImage imageNamed:@"noPhoto"];
-        //[cell.tableImageView setFrame:CGRectZero];
-        
-        [self.imageOperationQueue addOperationWithBlock:^{
-            NSURL *imageurl = [NSURL URLWithString:imageUrlString];
-            UIImage *img = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageurl]];
-            
-            if (img != nil) {
-                [self.imageCache setObject:img forKey:imageUrlString];
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    ImageTableViewCell *updateCell = (ImageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-                    if (updateCell) {
-                        //[updateCell.tableImageView setFrame:...];
-                        [updateCell.tableImageView setImage:img];
-                    }
-                }];
-            }
-        }];
-    }
-    
     return cell;
 }
 
