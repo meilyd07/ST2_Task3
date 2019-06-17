@@ -30,6 +30,7 @@
     if ([[notification name] isEqualToString:@"ImageLoaded"]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.imageView.image = [self.viewModel getImage];
+            [self.view layoutIfNeeded];
         });
     }
 }
@@ -51,7 +52,7 @@
 
 - (void)addDetailViewConstraints {
     self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
-    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0f constant:0];
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0f constant:68];
 
     CGFloat ratio = self.imageView.image.size.width / self.imageView.image.size.height;
     NSLayoutConstraint *ratioConstraint = [NSLayoutConstraint constraintWithItem:self.imageView
