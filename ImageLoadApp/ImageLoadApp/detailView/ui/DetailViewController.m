@@ -30,7 +30,6 @@
     if ([[notification name] isEqualToString:@"ImageLoaded"]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.imageView.image = [self.viewModel getImage];
-            [self.view layoutIfNeeded];
         });
     }
 }
@@ -52,22 +51,15 @@
 
 - (void)addDetailViewConstraints {
     self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
-    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0f constant:68];
-
     CGFloat ratio = self.imageView.image.size.width / self.imageView.image.size.height;
-    NSLayoutConstraint *ratioConstraint = [NSLayoutConstraint constraintWithItem:self.imageView
-                                                                       attribute:NSLayoutAttributeWidth
-                                                                       relatedBy:NSLayoutRelationEqual
-                                                                          toItem:self.imageView
-                                                                       attribute:NSLayoutAttributeHeight
-                                                                      multiplier:ratio
-                                                                        constant:1.f];
-    [self.imageView addConstraint:ratioConstraint];
-    NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0];
-    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationLessThanOrEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:1.0f constant:0];
+    [self.imageView.widthAnchor constraintEqualToAnchor:self.imageView.heightAnchor multiplier:ratio constant:1.f].active = YES;
+    [self.imageView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor
+                                             constant:0].active = YES;
     
-    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.imageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:1.0f constant:0];
-    [self.view addConstraints:@[top, height, leading, width]];
+    [self.imageView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor
+                                             constant:0].active = YES;
+    [self.imageView.widthAnchor constraintLessThanOrEqualToAnchor:self.view.widthAnchor multiplier:1.0f].active = YES;
+    [self.imageView.heightAnchor constraintLessThanOrEqualToAnchor:self.view.heightAnchor multiplier:1.0f].active = YES;
 }
 
 - (void)tapBack:(id)sender {

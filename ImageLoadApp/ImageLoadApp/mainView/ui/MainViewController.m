@@ -74,11 +74,14 @@ NSString * const imageCell = @"imageCell";
 
 - (void)addConstraintToTable {
     self.table.translatesAutoresizingMaskIntoConstraints = NO;
-    NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:self.table attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0f constant:0];
-    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.table attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:0];
-    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self.table attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
-    NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:self.table attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:0];
-    [self.view addConstraints:@[leading, trailing, top, bottom]];
+    [self.table.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor
+                                             constant:0].active = YES;
+    [self.table.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor
+                                         constant:0].active = YES;
+    [self.table.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor
+                                            constant:0].active = YES;
+    [self.table.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor
+                                             constant:0].active = YES;
 }
 
 #pragma mark - Table Source and Delegate
