@@ -88,7 +88,7 @@
             if (img != nil) {
                 [self.imageCache setObject:img forKey:imageUrlString];
                 NSString *sValue = [@(i) stringValue];
-                NSDictionary *dictionary = @{@"cellIndex": sValue};
+                NSDictionary *dictionary = @{@"cellIndex": sValue, @"imageUrlString": imageUrlString};
                 [[NSNotificationCenter defaultCenter]
                  postNotificationName:@"ImageLoaded"
                  object:imageUrlString

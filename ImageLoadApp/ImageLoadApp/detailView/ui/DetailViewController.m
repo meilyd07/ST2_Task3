@@ -10,6 +10,7 @@
 
 @interface DetailViewController ()
 @property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) NSLayoutConstraint *aspectRatioConstraint;
 @end
 
 @implementation DetailViewController
@@ -28,9 +29,19 @@
 - (void) imageLoadedNotification:(NSNotification *) notification
 {
     if ([[notification name] isEqualToString:@"ImageLoaded"]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.imageView.image = [self.viewModel getImage];
-        });
+        if (notification.userInfo[@"imageUrlString"] == self.viewModel.path) {
+            NSLog(@"%@", self.viewModel.path);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIImage *image = [self.viewModel getImage];
+                NSLog(@"sizes: %f %f", image.size.width, image.size.height);
+                self.imageView.image = image;
+                CGFloat ratio = image.size.width / image.size.height;
+                self.aspectRatioConstraint.active = NO;
+                self.aspectRatioConstraint = [self.imageView.widthAnchor constraintEqualToAnchor:self.imageView.heightAnchor multiplier:ratio constant:1.f];
+                self.aspectRatioConstraint.active = YES;
+                [self.view setNeedsUpdateConstraints];
+            });
+        }
     }
 }
 
@@ -52,7 +63,10 @@
 - (void)addDetailViewConstraints {
     self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
     CGFloat ratio = self.imageView.image.size.width / self.imageView.image.size.height;
-    [self.imageView.widthAnchor constraintEqualToAnchor:self.imageView.heightAnchor multiplier:ratio constant:1.f].active = YES;
+    
+    NSLog(@"init sizes: %f %f", self.imageView.image.size.width, self.imageView.image.size.height);
+    self.aspectRatioConstraint = [self.imageView.widthAnchor constraintEqualToAnchor:self.imageView.heightAnchor multiplier:ratio constant:1.f];
+    self.aspectRatioConstraint.active = YES;
     [self.imageView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor
                                              constant:0].active = YES;
     
