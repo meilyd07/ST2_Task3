@@ -51,18 +51,16 @@
     self.tableImageView.clipsToBounds = YES;
     self.tableImageView.layer.borderColor = [UIColor blackColor].CGColor;
     self.tableImageView.layer.borderWidth = 1;
-    NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:self.tableImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute  multiplier:1 constant:150];
-    NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:self.tableImageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute  multiplier:1 constant:150];
-    NSLayoutConstraint *centerImageY = [NSLayoutConstraint constraintWithItem:self.tableImageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
-    
-    NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:self.tableImageView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeading multiplier:1.0f constant:10];
+    [self.tableImageView.widthAnchor constraintEqualToConstant:150.0f].active = YES;
+    [self.tableImageView.heightAnchor constraintEqualToConstant:150.0f].active = YES;
+    [self.tableImageView.centerYAnchor constraintEqualToAnchor:self.contentView.centerYAnchor].active = YES;
+    [self.tableImageView.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:10.0f].active = YES;
     
     self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.descriptionLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1 constant:10];
-    NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:self.descriptionLabel attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTrailing multiplier:1.0f constant:-40];
-    NSLayoutConstraint *distance = [NSLayoutConstraint constraintWithItem:self.tableImageView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.descriptionLabel attribute:NSLayoutAttributeLeading multiplier:1 constant:-10];
     
-    [self.contentView addConstraints:@[leading, width, height, centerImageY, top, trailing, distance]];
+    [self.descriptionLabel.topAnchor constraintEqualToAnchor:self.contentView.topAnchor constant:10.0f].active = YES;
+    [self.descriptionLabel.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-40.0f].active = YES;
+    [self.tableImageView.trailingAnchor constraintEqualToAnchor:self.descriptionLabel.leadingAnchor constant:-10.0f].active = YES;
 }
 
 @end
